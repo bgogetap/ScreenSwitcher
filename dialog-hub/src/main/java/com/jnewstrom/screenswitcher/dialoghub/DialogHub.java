@@ -40,7 +40,7 @@ public final class DialogHub {
         for (DialogInformation information : dialogInformationList) {
             Dialog dialog = information.dialogWeakReference.get();
             if (dialog != null && dialog.isShowing()) {
-                items.add(information.dialogFactory);
+                items.add(information.getDialogFactory());
                 dialog.dismiss();
             }
         }
@@ -60,11 +60,17 @@ public final class DialogHub {
 
     private static final class DialogInformation {
         final WeakReference<Dialog> dialogWeakReference;
-        final DialogFactory dialogFactory;
+
+        private final DialogFactory dialogFactory;
 
         DialogInformation(Dialog dialog, DialogFactory factory) {
             this.dialogWeakReference = new WeakReference<>(dialog);
             this.dialogFactory = factory;
+        }
+
+        DialogFactory getDialogFactory() {
+            dialogFactory.saveState(dialogWeakReference.get());
+            return dialogFactory;
         }
     }
 }

@@ -5,4 +5,6 @@ import android.content.Context;
 
 public interface DialogFactory {
     Dialog createDialog(Context context);
+
+    void saveState(Dialog dialog);
 }

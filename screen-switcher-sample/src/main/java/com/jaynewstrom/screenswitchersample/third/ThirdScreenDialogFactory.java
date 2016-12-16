@@ -13,4 +13,9 @@ final class ThirdScreenDialogFactory extends ScopedDialogFactory<ThirdComponent>
     @Override public Dialog createDialog(Context context, ThirdComponent component) {
         return new ThirdScreenDialog(context, component);
     }
+
+    @Override
+    public void saveState(Dialog dialog) {
+
+    }
 }
